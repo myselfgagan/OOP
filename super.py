@@ -1,17 +1,31 @@
-class Emp():
-    def __init__(self, id, name, Add):
-        self.id = id
-        self.name = name
-        self.Add = Add
- 
-# Class freelancer inherits EMP
-class Freelance(Emp):
-    def __init__(self, id, name, Add, Emails):
-        super().__init__(id, name, Add)
-        self.Emails = Emails
- 
-Emp_1 = Freelance(103, "Gagan", "Noida" , "KKK@gmails")
-print('The ID is:', Emp_1.id)
-print('The Name is:', Emp_1.name)
-print('The Address is:', Emp_1.Add)
-print('The Emails is:', Emp_1.Emails)
+# Demonstration of super() to call parent class method
+class Person:
+    def show(self):
+        print("Parent show()")
+
+class Student(Person):
+    def show(self, value=None):
+        # Call parent version logic
+        super().show()      # calls the next 'show()' method in the inheritance chain
+        # Then child version logic
+        if value:
+            print("Child show():", value)
+
+p1 = Student()
+p1.show()           # Parent show()
+p1.show("Hello")    # Parent show() + Child show(): Hello
+
+
+# Another example with additional logic before and after calling parent method
+# we can call super at any point in the method
+class Person:
+    def show(self):
+        print("Parent show()")
+
+class Student(Person):
+    def show(self, value=None):
+        print("Before calling parent")   # like pre-decorator logic -> but it's not a decorator
+        super().show()                    # call parent method
+        print("After calling parent")    # like post-decorator logic -> but it's not a decorator
+        if value:
+            print("Child show():", value)
